@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
-import "./loadEnviroment.js";
+import "./loadEnviroment.mjs";
+import semester from "./routes/semester.mjs";
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -12,7 +13,8 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+app.use("/semester", semester);
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Example app listening on port ${PORT}`);
 });

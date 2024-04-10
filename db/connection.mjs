@@ -11,4 +11,6 @@ try {
     console.error(e);
 }
 
-let smcDB = conn.db("smc")
+let smcDB = conn.db("smc");
+
+export default smcDB;
