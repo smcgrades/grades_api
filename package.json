@@ -1,0 +1,25 @@
+{
+  "name": "grades_api",
+  "version": "1.0.0",
+  "description": "An API built on Node.js that can view historical grade distribution data from Santa Monica College.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smcgrades/grades_api.git"
+  },
+  "author": "Asarel Castellanos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smcgrades/grades_api/issues"
+  },
+  "homepage": "https://github.com/smcgrades/grades_api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.5.0"
+  }
+}
