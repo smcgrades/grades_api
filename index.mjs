@@ -16,5 +16,5 @@ app.get('/', (req, res) => {
 app.use("/semester", semester);
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+  console.log(`SMC Gades API listening at: ${PORT}`);
 });
