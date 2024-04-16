@@ -27,4 +27,60 @@ router.get("/:semester_year/courses", async (req, res) => {
   res.send(results).status(200);
 });
 
+// GET /semester/:semester_year/courses/:course_name
+router.get("/:semester_year/courses/:course_name", async (req, res) => {
+  let collectionName = req.params.semester_year;
+  let courseName = req.params.course_name;
+  courseName = courseName.replace(/_/g, " ");
+  // let projection = { Course: 1, _id: 0 };
+
+  let collection = await db.collection(collectionName);
+  let results = await collection
+    .find({
+      Course: courseName,
+    })
+    .toArray();
+
+  results.sort((a, b) => {
+    return a["Instructor"] > b["Instructor"] ? 1 : -1;
+  });
+
+  res.send(results).status(200);
+});
+
+// GET /semester/:semester_year/instructors
+router.get("/:semester_year/instructors", async (req, res) => {
+  let collectionName = req.params.semester_year;
+  let projection = { Instructor: 1, _id: 0 };
+
+  let collection = await db.collection(collectionName);
+  let results = await collection.find({}).project(projection).toArray();
+
+  results.sort((a, b) => {
+    return a["Instructor"] > b["Instructor"] ? 1 : -1;
+  });
+
+  results = [...new Set(results.map((result) => result.Instructor))];
+
+  res.send(results).status(200);
+});
+
+// GET /semester/:semester_year/instructors/:instructor_name
+router.get("/:semester_year/instructors/:instructor_name", async (req, res) => {
+  let collectionName = req.params.semester_year;
+  let instructorName = req.params.instructor_name;
+  instructorName = instructorName.replace(/_/g, " ");
+
+  let collection = await db.collection(collectionName);
+  let results = await collection.find({
+    Instructor: instructorName
+  }).toArray();
+
+  results.sort((a, b) => {
+    return a["Course"] > b["Course"] ? 1 : -1;
+  });
+
+  res.send(results).status(200);
+});
+
 export default router;
