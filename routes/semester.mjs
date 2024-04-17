@@ -4,6 +4,11 @@ import return_courses from "../helper/return_courses.mjs";
 
 const router = express.Router();
 
+// GET /semester 
+router.get('/', function(req, res) {
+  res.render('pages/semester');
+});
+
 // GET /semester/:semester_year
 router.get("/:semester_year", async (req, res) => {
   let collectionName = req.params.semester_year;
