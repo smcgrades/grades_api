@@ -3,6 +3,132 @@
   <%- include('../partials/head'); %>
   <body>
     <%- include('../partials/navbar'); %>
+    <div class="container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Route</th>
+            <th>Route Parameter(s)</th>
+            <th>Example(s) Parameter</th>
+            <th>Example(s) Output</th>
+            <th>Explination</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>/semester</th>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>This will return an HTML page.</td>
+          </tr>
+          <tr>
+            <th>/semester/:semester_year</th>
+            <td>semester_year</td>
+            <td>fall_2016, spring_2021</td>
+            <td>
+              <code>
+                <!-- <code> -->
+                [ { "_id": "65f1f2f4c223f0f39ccb8773", "A": 5, "B": 3, "C": 4,
+                "D": 1, "F": 2, "P": 0, "NP": 0, "IX": 0, "RD": 0, "SP": 0, "W":
+                2, "EW": 0, "Total": 17, "Department": "Life Science",
+                "Subject": "BIOL", "Course": "BIOL 15N", "Instructor": "MOSS J
+                L" }, ... ]
+                <!-- </code> -->
+              </code>
+            </td>
+            <td>
+              This will return a list of all offered courses as objects (with
+              all their key:value pairs) that were available during
+              <code>semester_year</code>.
+            </td>
+          </tr>
+          <tr>
+            <th>/semester/:semester_year/courses</th>
+            <td>semester_year</td>
+            <td>fall_2016, spring_2021</td>
+            <td>
+              <code>
+                [ "ACCTG 1", "ACCTG 2", "ACCTG 6", "ACCTG 7", "ACCTG 9", "AHIS
+                5", "AHIS 6", "AHIS 11", "ANTHRO 10", "ANTHRO 14", "ART 31",
+                "ART 32", "ART 34B", "ART 34A", ... ]
+              </code>
+            </td>
+            <td>
+              This will return a list of all offered courses (just course names)
+              that were available during <code>semester_year</code>.
+            </td>
+          </tr>
+          <tr>
+            <th>/semester/:semester_year/courses/:course_name</th>
+            <td>semester_year & course_name</td>
+            <td>
+              semester_year: fall_2016, spring_2021
+              <br />
+              <br />
+              course_name: ACCTG_1, BIOL_15N
+            </td>
+            <td>
+              <code>
+                [ { "_id": "65f1f2f4c223f0f39ccb8773", "A": 5, "B": 3, "C": 4,
+                "D": 1, "F": 2, "P": 0, "NP": 0, "IX": 0, "RD": 0, "SP": 0, "W":
+                2, "EW": 0, "Total": 17, "Department": "Life Science",
+                "Subject": "BIOL", "Course": "BIOL 15N", "Instructor": "MOSS J
+                L" }, ... ]
+              </code>
+            </td>
+            <td>
+              This will return a list of all offered courses as objects (with
+              all their key:value pairs) that contain
+              <code>course_name</code> and that were available during
+              <code>semester_year</code>.
+            </td>
+          </tr>
+          <tr>
+            <th>/semester/:semester_year/instructors</th>
+            <td>semester_year</td>
+            <td>fall_2016, spring_2021</td>
+            <td>
+              <code>
+                [ "ABATE A", "ABBANI M A", "ABDEL‐RAHMAN A A", "ABODE JR P J",
+                "ADAIR J S", "ADAIR‐LYNCH T A", "ADAMS J J", "ADELMAN A",
+                "ADKINS L B", ... ]
+              </code>
+            </td>
+            <td>
+              This will return a list of all instructors (just instructors
+              names) that were available during that
+              <code>semester_year</code>.
+            </td>
+          </tr>
+          <tr>
+            <th>/semester/:semester_year/instructors/:instructor_name</th>
+            <td>semester_year & instructor_name</td>
+            <td>
+              semester_year: fall_2016, spring_2021
+              <br />
+              <br />
+              course_name: ABATE_A, MEYER_E_E
+            </td>
+            <td>
+              <code>
+                [ { "_id": "65f1f2f4c223f0f39ccb8775", "A": 26, "B": 23, "C": 5,
+                "D": 2, "F": 3, "P": 0, "NP": 0, "IX": 4, "RD": 0, "SP": 0, "W":
+                11, "EW": 0, "Total": 74, "Department": "English", "Subject":
+                "ENGL", "Course": "ENGL 1", "Instructor": "MEYER E E" } ... ]
+              </code>
+            </td>
+            <td>
+              This will return a list of all offered courses as objects (with
+              all their key:value pairs) that contain
+              <code>instructor_name</code> and that were available during
+              <code>semester_year</code>.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <%- include('../partials/footer'); %>
   </body>
 </html>
