@@ -14,7 +14,7 @@ router.get("/:semester_year", async (req, res) => {
   let collectionName = req.params.semester_year;
 
   let collection = await db.collection(collectionName);
-  let results = await collection.find({}).limit().toArray();
+  let results = await collection.find({}).toArray();
 
   res.send(results).status(200);
 });
