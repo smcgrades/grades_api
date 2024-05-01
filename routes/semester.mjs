@@ -1,6 +1,6 @@
 import express from "express";
 import db from "../db/connection.mjs";
-import return_courses from "../helper/return_courses.mjs";
+// import return_courses from "../helper/return_courses.mjs";
 
 const router = express.Router();
 
@@ -14,7 +14,7 @@ router.get("/:semester_year", async (req, res) => {
   let collectionName = req.params.semester_year;
 
   let collection = await db.collection(collectionName);
-  let results = await collection.find({}).limit().toArray();
+  let results = await collection.find({}).toArray();
 
   res.send(results).status(200);
 });
@@ -27,7 +27,7 @@ router.get("/:semester_year/courses", async (req, res) => {
   let collection = await db.collection(collectionName);
   let results = await collection.find({}).project(projection).toArray();
 
-  results = return_courses(results);
+  results = [...new Set(results.map((result) => result.Course))];
 
   res.send(results).status(200);
 });
@@ -37,7 +37,6 @@ router.get("/:semester_year/courses/:course_name", async (req, res) => {
   let collectionName = req.params.semester_year;
   let courseName = req.params.course_name;
   courseName = courseName.replace(/_/g, " ");
-  // let projection = { Course: 1, _id: 0 };
 
   let collection = await db.collection(collectionName);
   let results = await collection
@@ -45,10 +44,6 @@ router.get("/:semester_year/courses/:course_name", async (req, res) => {
       Course: courseName,
     })
     .toArray();
-
-  results.sort((a, b) => {
-    return a["Instructor"] > b["Instructor"] ? 1 : -1;
-  });
 
   res.send(results).status(200);
 });
@@ -60,10 +55,6 @@ router.get("/:semester_year/instructors", async (req, res) => {
 
   let collection = await db.collection(collectionName);
   let results = await collection.find({}).project(projection).toArray();
-
-  results.sort((a, b) => {
-    return a["Instructor"] > b["Instructor"] ? 1 : -1;
-  });
 
   results = [...new Set(results.map((result) => result.Instructor))];
 
@@ -80,10 +71,6 @@ router.get("/:semester_year/instructors/:instructor_name", async (req, res) => {
   let results = await collection.find({
     Instructor: instructorName
   }).toArray();
-
-  results.sort((a, b) => {
-    return a["Course"] > b["Course"] ? 1 : -1;
-  });
 
   res.send(results).status(200);
 });

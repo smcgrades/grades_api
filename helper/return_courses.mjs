@@ -10,6 +10,9 @@ export default function return_courses(courses) {
   courses.sort((a, b) => {
     const detailsA = extractDetails(a);
     const detailsB = extractDetails(b);
+
+    console.log("detailsA", detailsA);
+    console.log("detailsB", detailsB);
   
     if (detailsA.department === detailsB.department) {
       // Sort such that n is followed immediately by n+1
